@@ -20,7 +20,6 @@ def print_board(args):  # showing the current board of the game
 
 def insert_letter(guess_map, phrase, letter):
     index = 0
-    help_guess_map = ''
     for q in phrase:
         help_str = ''
         help_guess_map = guess_map[index]
@@ -123,14 +122,6 @@ while True:
             print('yeah you won!!!!!!!')
             print(f'you have {Points} points!')
             break
-
-
-
-
-
-
-
-
 
     while True:  # while for input if players want replay
         replay = input('wanna replay? y/n : ')
