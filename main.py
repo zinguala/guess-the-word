@@ -1,5 +1,14 @@
 # functions--------------------------------------------------
 import random
+import time
+
+
+def win_check(args):
+    for e in args:
+        for y in e:
+            if y == '_':
+                return False
+    return True
 
 
 def print_board(args):  # showing the current board of the game
@@ -9,9 +18,9 @@ def print_board(args):  # showing the current board of the game
     return None
 
 
-def insert_choosed_letter(guess_map, phrase, letter):
+def insert_letter(guess_map, phrase, letter):
     index = 0
-    help_guess_map=''
+    help_guess_map = ''
     for q in phrase:
         help_str = ''
         help_guess_map = guess_map[index]
@@ -34,7 +43,7 @@ Words = [['act', 'as', 'if'], ['act', 'without', 'expectation'], ['always', 'be'
          ['believe', 'you', 'can'], ['build', 'quality', 'relationships'], ['build', 'strategic', 'partnerships'],
          ['celebrate', 'all', 'success'], ['change', 'is', 'good'], ['commit', 'or', 'quit'], ['do your best'],
          ['dreams', 'come', 'true'], ['embrace', 'constant', 'change'], ['energy', 'draws', 'attention'],
-         ['focus', 'and', 'win'], ['Friends', 'are', 'treasures'], ['Happiness', 'is', 'Choice'],
+         ['focus', 'and', 'win'], ['friends', 'are', 'treasures'], ['Happiness', 'is', 'Choice'],
          ['Life', 'is', 'awesome']]
 Word = ''
 Phrase = []
@@ -46,7 +55,9 @@ All_english_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l
                        'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 words_counter = 0
 
+
 while True:
+
     Phrase = []
     Guess_map = []
     Points = 0
@@ -72,6 +83,7 @@ while True:
         Guess_map.append(Word)
 
     print('Game starts!!! timer starts now...\n')
+    time_start = time.time()
     print_board(Guess_map)
 
     while True:
@@ -83,17 +95,18 @@ while True:
             else:
                 if Letter in guessed_letters:
                     print('already guessed this letter, please try again')
+                    print_board(Guess_map)
                 else:
                     guessed_letters.append(Letter)
                     break
 
-        Guess_map = (insert_choosed_letter(Guess_map, Phrase, Letter))
+        Guess_map = (insert_letter(Guess_map, Phrase, Letter))
         print_board(Guess_map)
 
         words_counter = 0
         for m in Phrase:
             if Letter in m:
-                print('yea !! added 5 points!')
+                print('good guess !! added 5 points!')
                 Points += 5
                 break
             elif words_counter == (len(Phrase)-1):
@@ -101,7 +114,18 @@ while True:
                 Points -= 1
 
             words_counter += 1
-        print(f'you have {Points} points')
+
+        if win_check(Guess_map):
+            time_won = time.time()
+            if (time_won - time_start) < 30:
+                Points += 100
+                print('greate you finished fast and won a bonus of 100 points!!')
+            print('yeah you won!!!!!!!')
+            print(f'you have {Points} points!')
+            break
+
+
+
 
 
 
