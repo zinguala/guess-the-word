@@ -18,21 +18,20 @@ def print_board(args):  # showing the current board of the game
     return None
 
 
-def insert_letter(guess_map, phrase, letter):
-    index = 0
-    for q in phrase:
-        help_str = ''
+def insert_letter(guess_map, phrase, letter):   # function for replacing '_' in the game map with the typed letter
+    index = 0        # help index for reloading the help_guess_map with every one word at a time
+    for q in phrase:    # for to go over all the words in the phrase
+        help_str = ''     # reset the help_str for start new string for later
         help_guess_map = guess_map[index]
-        if letter in q:
-            for t in range(len(q)):
+        if letter in q:    # check if the letter inserted by the player is in the word checked
+            for t in range(len(q)):  # if yes then construct the help_str  revealing the letter inserted
                 if q[t] == letter:
                     help_str += letter
                 else:
                     help_str += help_guess_map[t]
-            guess_map[index] = help_str
-        index += 1
-
-    return guess_map
+            guess_map[index] = help_str       # after constructing the string, return it to the guess_map
+        index += 1                # index up by 1 to go over the next word
+    return guess_map               # at the end return the guess_map with the letter revealed
 
 
 # main code---------------------------------------------------
@@ -40,27 +39,22 @@ Words = [['act', 'as', 'if'], ['act', 'without', 'expectation'], ['always', 'be'
          ['always', 'be', 'yourself'], ['ask', 'powerful', 'questions'], ['audit', 'your', 'mistakes'],
          ['be', 'constantly', 'curious'], ['be', 'here', 'now'], ['believe', 'in', 'yourself'],
          ['believe', 'you', 'can'], ['build', 'quality', 'relationships'], ['build', 'strategic', 'partnerships'],
-         ['celebrate', 'all', 'success'], ['change', 'is', 'good'], ['commit', 'or', 'quit'], ['do your best'],
+         ['celebrate', 'all', 'success'], ['change', 'is', 'good'], ['commit', 'or', 'quit'], ['do', 'your', 'best'],
          ['dreams', 'come', 'true'], ['embrace', 'constant', 'change'], ['energy', 'draws', 'attention'],
          ['focus', 'and', 'win'], ['friends', 'are', 'treasures'], ['Happiness', 'is', 'Choice'],
          ['Life', 'is', 'awesome']]
 Word = ''
-Phrase = []
-Guess_map = []
-Points = 0
-Saved_old_games = []
-Letter = ''
+
+Saved_old_games = []   # for saving the old phrases used so they will not choose again
+Letter = ''            # the input of the player
 All_english_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                        'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-words_counter = 0
-
 
 while True:
-
-    Phrase = []
-    Guess_map = []
-    Points = 0
-    guessed_letters = []
+    Phrase = []       # list to insert the Phrase that randomly choose
+    Guess_map = []    # guess map to show the phrase hidden
+    Points = 0        # resting the points of the player
+    guessed_letters = []   # resting and save the letters guessed by the player
     print('welcome to guess the phrase game :)\n'
           'you need to guess the phrase \n'
           'every correct guess increase your score with 5 points\n'
@@ -102,13 +96,13 @@ while True:
         Guess_map = (insert_letter(Guess_map, Phrase, Letter))
         print_board(Guess_map)
 
-        words_counter = 0
-        for m in Phrase:
-            if Letter in m:
+        words_counter = 0  # for resting the words counter
+        for m in Phrase:    # for and if all words checked if contain the letter inserted by the player
+            if Letter in m:           # if yes add 5 points
                 print('good guess !! added 5 points!')
                 Points += 5
                 break
-            elif words_counter == (len(Phrase)-1):
+            elif words_counter == (len(Phrase)-1):      # if no decrease 1 point
                 print('wrong guess -1 points')
                 Points -= 1
 
