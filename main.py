@@ -60,13 +60,11 @@ while True:
           'every correct guess increase your score with 5 points\n'
           'every wrong guess lowers your score with 1 point\n'
           'if you guess the phrase before 30 seconds you will get a bonus of 100 points!!!\n')
-    while True:
-        Index = random.randrange(0, len(Words))
-        if Index not in Saved_old_games:
-            Saved_old_games.append(Index)
-            Phrase = Words[Index]
-            print(Saved_old_games)
-            print(Phrase)
+    while True:           # while for randomly choose phrase from the words bank
+        Index = random.randrange(0, len(Words))    # randomly create index from  0 to max index of the words list.
+        if Index not in Saved_old_games:     # check with index if not already used this phrase
+            Saved_old_games.append(Index)     # if not add this index to the list of used indexes
+            Phrase = Words[Index]           # if not used before load the phrase from the words index chose
             break
 
     for i in range(len(Phrase)):
