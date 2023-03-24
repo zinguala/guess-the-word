@@ -43,7 +43,7 @@ Words = [['act', 'as', 'if'], ['act', 'without', 'expectation'], ['always', 'be'
          ['dreams', 'come', 'true'], ['embrace', 'constant', 'change'], ['energy', 'draws', 'attention'],
          ['focus', 'and', 'win'], ['friends', 'are', 'treasures'], ['Happiness', 'is', 'Choice'],
          ['Life', 'is', 'awesome']]
-Word = ''
+
 
 Saved_old_games = []   # for saving the old phrases used so they will not choose again
 Letter = ''            # the input of the player
@@ -67,31 +67,31 @@ while True:
             Phrase = Words[Index]           # if not used before load the phrase from the words index chose
             break
 
-    for i in range(len(Phrase)):
-        Word = ''
+    for i in range(len(Phrase)):  # creating the guess map to show the player the the the hidden phrase
+        Word = ''                     # help variable for construction of the guess map
         for k in range(len(Phrase[i])):
             Word += '_'
         Guess_map.append(Word)
 
     print('Game starts!!! timer starts now...\n')
-    time_start = time.time()
-    print_board(Guess_map)
+    time_start = time.time()             # saves the start time to check if finished the game before 30 seconds
+    print_board(Guess_map)              # calls the print function to print the guess map
 
-    while True:
-        while True:
-            Letter = str(input('please insert one letter : '))
-            Letter = Letter.lower()
-            if Letter not in All_english_letters:
+    while True:           # while that runs the game until the player finishes to guess the phrase
+        while True:       # while that runs until  the player guessing new letter
+            Letter = str(input('please insert one letter : '))      # player input for letter guess
+            Letter = Letter.lower()                                # lowers the input letter if entered uppercase
+            if Letter not in All_english_letters:                   # check if the string is english letter
                 print('try again please insert one english letter')
             else:
-                if Letter in guessed_letters:
+                if Letter in guessed_letters:                       # check if the user already guessed this letter
                     print('already guessed this letter, please try again')
                     print_board(Guess_map)
                 else:
-                    guessed_letters.append(Letter)
+                    guessed_letters.append(Letter)                # if not , save the letter for guessed letters
                     break
 
-        Guess_map = (insert_letter(Guess_map, Phrase, Letter))
+        Guess_map = (insert_letter(Guess_map, Phrase, Letter))   # call the guess map function for check if the
         print_board(Guess_map)
 
         words_counter = 0  # for resting the words counter
@@ -100,20 +100,20 @@ while True:
                 print('good guess !! added 5 points!')
                 Points += 5
                 break
-            elif words_counter == (len(Phrase)-1):      # if no decrease 1 point
+            elif words_counter == (len(Phrase)-1):     # if checked all words and its wrong guess - decrease 1 point
                 print('wrong guess -1 points')
                 Points -= 1
 
             words_counter += 1
 
-        if win_check(Guess_map):
-            time_won = time.time()
-            if (time_won - time_start) < 30:
-                Points += 100
+        if win_check(Guess_map):     # check if the player guessed all the words from the phrase
+            time_won = time.time()       # saves the time the player wins with epoch time
+            if (time_won - time_start) < 30:    # check if the player wins in less than 30 seconds
+                Points += 100                    # if yes add bonus of  100 points
                 print('greate you finished fast and won a bonus of 100 points!!')
             print('yeah you won!!!!!!!')
             print(f'you have {Points} points!')
-            break
+            break                                    # game finished breaks the while of the game.
 
     while True:  # while for input if players want replay
         replay = input('wanna replay? y/n : ')
