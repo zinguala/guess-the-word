@@ -1,19 +1,19 @@
 # functions--------------------------------------------------
-import random
-import time
+import random            # for the random choose of phrase
+import time               # for the use of epoch time to see how much time game lasted
 
 
-def win_check(args):
+def win_check(args):      # check if player guessed all the words
     for e in args:
-        for y in e:
+        for y in e:           # loop to go over all the letters
             if y == '_':
-                return False
-    return True
+                return False    # if there are still blank spots return false
+    return True                 # if there are no blank spots return True
 
 
 def print_board(args):  # showing the current board of the game
     for q in args:
-        print(q, end=' ')
+        print(q, end=' ')  # print all the words with spaces between them
     print('\n')
     return None
 
