@@ -45,7 +45,7 @@ Words = [['act', 'as', 'if'], ['act', 'without', 'expectation'], ['always', 'be'
          ['Life', 'is', 'awesome']]
 
 
-Saved_old_games = []   # for saving the old phrases used so they will not choose again
+Saved_old_games = []   # for saving the old phrases used, so they will not choose again
 Letter = ''            # the input of the player
 All_english_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                        'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
