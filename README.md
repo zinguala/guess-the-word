@@ -1,2 +1,2 @@
-# guess-the-word
+# Guess-The-Word
 Code by Aviv Singer
