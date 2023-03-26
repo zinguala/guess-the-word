@@ -1,2 +1,2 @@
 # guess-the-word
-made by Aviv Singer
+Code by Aviv Singer
